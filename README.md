@@ -7,30 +7,28 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# 🖥 Backend - Gestión de Empleados (Laravel)
+Backend - Gestión de Empleados (Laravel)
 
 Este es el backend del sistema de gestión de empleados, desarrollado con **Laravel**.  
 Incluye **autenticación con JWT**, un **CRUD de empleados** y **Swagger** para documentar la API.
 
 ---
 
-## 🚀 **Instalación y Configuración**
+**Instalación y Configuración**
 Sigue estos pasos para instalar y ejecutar el backend en tu máquina local.
 
-### **1️⃣ Requisitos previos**
+### 1 Requisitos previos**
 Antes de comenzar, asegúrate de tener instalado:
-- **PHP 8.1+** 👉 [Descargar PHP](https://www.php.net/downloads)
-- **Composer** 👉 [Descargar Composer](https://getcomposer.org/)
-- **MySQL 5.7+ o MariaDB** 👉 [Descargar MySQL](https://dev.mysql.com/downloads/)
-- **Node.js (Opcional, para ejecutar frontend)** 👉 [Descargar Node.js](https://nodejs.org/)
+- **PHP 8.1+**  
+- **Composer** 
+- **MySQL 5.7+ o MariaDB**   
+### 2 Clonar este repositorio**
 
-### **2️⃣ Clonar este repositorio**
-
-3️⃣ Instalar dependencias
+## 3 Instalar dependencias
 
 composer install
 
-4️⃣ Configurar variables de entorno
+## 4 Configurar variables de entorno
 Renombra el archivo .env.example a .env y edítalo con los datos de tu base de datos:
 
 cp .env.example .env
@@ -121,26 +119,28 @@ MAIL_FROM_ADDRESS=pruebasenviocorreolaraveloscar@gmail.com</br>
 MAIL_FROM_NAME="Testing"</br>
 
 
-5️⃣ Generar la clave de la aplicación
+## 5 Generar la clave de la aplicación
 
 php artisan key:generate
 
-6️⃣ Configurar JWT
+## 6 Configurar JWT
 
 php artisan jwt:secret
 
-7️⃣ Ejecutar migraciones y seeders
+## 7 Ejecutar migraciones y seeders
 Para crear las tablas y datos iniciales en la base de datos, ejecuta:
 
 php artisan migrate --seed
 
-8️⃣ Levantar el servidor
+## 8 Levantar el servidor
 
 php artisan serve --host=localhost --port=8001
 
 Ejecutar FRONTEND PARA HACER REGISTRO DE USUARIOS NUEVOS Y PODER INTERACTUAR.
 
 Si van a quieren ver Swagger   [http://localhost:8001/](http://localhost:8001/api/documentation/)
+
+## 9 Aunque no es necesario, pueden descargar el frontEnd de aca https://github.com/jijunahe/frontendReact/blob/main/README.md
 
 
 
