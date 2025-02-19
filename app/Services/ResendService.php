@@ -27,10 +27,10 @@ class ResendService
         try {
             $response = $this->client->post('emails', [
                 'json' => [
-                    'from' => 'oscardiazovalle@gmail.com',  // Cambia esto por tu dominio autorizado
+                    'from' => 'oscardiazovalle@gmail.com',  
                     'to' => $to,
                     'subject' => '¡Bienvenido a la empresa!',
-                    'html' => "<h1>Hola, $name</h1><p>Bienvenido a nuestra empresa. Esperamos que tengas una gran experiencia con nosotros.</p>",
+                    'html' => "<h1>Hola, $name</h1><p>Pruebas de mensaje email.</p>",
                 ]
             ]);
             Log::error('Enviando correo a : ' .$to. ' Respuesta '.json_encode( $response));

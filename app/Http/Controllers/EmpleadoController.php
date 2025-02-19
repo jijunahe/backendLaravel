@@ -152,7 +152,7 @@ class EmpleadoController extends Controller
         if ($validador->fails()) {
             return response()->json([
                 'error' => $validador->errors()
-            ], 422); // Código HTTP correcto para errores de validación
+            ], 422); //  errores de validación
         }
 
         $empleado = Empleado::create($request->all());

@@ -7,9 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * Define las rutas de la aplicación.
-     */
+     
     public function boot()
     {
         $this->routes(function () {
