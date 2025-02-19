@@ -112,10 +112,10 @@ RESEND_API_KEY=re_VTEEr1Qu_JrAvoe3xAfUd2PbxQ1WN4Hwa</br>
 MAIL_MAILER=smtp</br>
 MAIL_HOST=smtp.gmail.com</br>
 MAIL_PORT=587</br>
-MAIL_USERNAME=pruebasenviocorreolaraveloscar@gmail.com</br>
-MAIL_PASSWORD=jeieujzzyqvquyyj</br>
+MAIL_USERNAME=test@gmail.com</br>
+MAIL_PASSWORD=testtest</br>
 MAIL_ENCRYPTION=tls</br>
-MAIL_FROM_ADDRESS=pruebasenviocorreolaraveloscar@gmail.com</br>
+MAIL_FROM_ADDRESS=testtest@gmail.com</br>
 MAIL_FROM_NAME="Testing"</br>
 
 
