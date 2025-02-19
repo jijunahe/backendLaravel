@@ -7,60 +7,141 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# 🖥 Backend - Gestión de Empleados (Laravel)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este es el backend del sistema de gestión de empleados, desarrollado con **Laravel**.  
+Incluye **autenticación con JWT**, un **CRUD de empleados** y **Swagger** para documentar la API.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🚀 **Instalación y Configuración**
+Sigue estos pasos para instalar y ejecutar el backend en tu máquina local.
 
-## Learning Laravel
+### **1️⃣ Requisitos previos**
+Antes de comenzar, asegúrate de tener instalado:
+- **PHP 8.1+** 👉 [Descargar PHP](https://www.php.net/downloads)
+- **Composer** 👉 [Descargar Composer](https://getcomposer.org/)
+- **MySQL 5.7+ o MariaDB** 👉 [Descargar MySQL](https://dev.mysql.com/downloads/)
+- **Node.js (Opcional, para ejecutar frontend)** 👉 [Descargar Node.js](https://nodejs.org/)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### **2️⃣ Clonar este repositorio**
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3️⃣ Instalar dependencias
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+composer install
 
-## Laravel Sponsors
+4️⃣ Configurar variables de entorno
+Renombra el archivo .env.example a .env y edítalo con los datos de tu base de datos:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+cp .env.example .env
 
-### Premium Partners
+Dentro del archivo .env, configura:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+APP_NAME=Laravel</br>
+APP_ENV=local</br>
+APP_KEY=base64:mgBgV5uEJHGkrUg43YcnKTBuJZdvZ8v1ZEGek0bzHCk=</br>
+APP_DEBUG=true</br>
+APP_TIMEZONE=UTC</br>
+APP_URL=http://localhost</br>
 
-## Contributing
+APP_LOCALE=en</br>
+APP_FALLBACK_LOCALE=en</br>
+APP_FAKER_LOCALE=en_US</br>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+APP_MAINTENANCE_DRIVER=file</br>
+# APP_MAINTENANCE_STORE=database</br>
 
-## Code of Conduct
+PHP_CLI_SERVER_WORKERS=4</br>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+BCRYPT_ROUNDS=12</br>
 
-## Security Vulnerabilities
+LOG_CHANNEL=stack</br>
+LOG_STACK=single</br>
+LOG_DEPRECATIONS_CHANNEL=null</br>
+LOG_LEVEL=debug</br>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+DB_CONNECTION=mysql</br>
+ DB_HOST=192.168.0.8</br>
+ DB_PORT=3306</br>
+ DB_DATABASE=talent</br>
+ DB_USERNAME=nroot</br>
+ DB_PASSWORD=12345678</br>
 
-## License
+SESSION_DRIVER=database</br>
+SESSION_LIFETIME=120</br>
+SESSION_ENCRYPT=false</br>
+SESSION_PATH=/</br>
+SESSION_DOMAIN=null</br>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+BROADCAST_CONNECTION=log</br>
+FILESYSTEM_DISK=local</br>
+QUEUE_CONNECTION=database</br>
+
+CACHE_STORE=database</br>
+CACHE_PREFIX=</br>
+
+MEMCACHED_HOST=192.168.0.8</br>
+
+REDIS_CLIENT=phpredis</br>
+REDIS_HOST=192.168.0.8</br>
+REDIS_PASSWORD=null</br>
+REDIS_PORT=6379</br>
+
+MAIL_MAILER=log</br>
+MAIL_SCHEME=null</br>
+MAIL_HOST=192.168.0.8</br>
+MAIL_PORT=2525</br>
+MAIL_USERNAME=null</br>
+MAIL_PASSWORD=null</br>
+MAIL_FROM_ADDRESS="hello@example.com"</br>
+MAIL_FROM_NAME="${APP_NAME}"</br>
+
+AWS_ACCESS_KEY_ID=</br>
+AWS_SECRET_ACCESS_KEY=</br>
+AWS_DEFAULT_REGION=us-east-</br>1
+AWS_BUCKET=</br>
+AWS_USE_PATH_STYLE_ENDPOINT=false</br>
+
+VITE_APP_NAME="${APP_NAME}"</br>
+
+JWT_SECRET=dO7LlaTcSr7nW1Y4xBLZNYj2T1wFTSAPJBSgE9QxibTiccBTFKHQQ9VCAyIJ1FRl</br>
+AUTH_GUARD=web</br>
+AUTH_PASSWORD_BROKER=user </br>
+RESEND_API_KEY=re_VTEEr1Qu_JrAvoe3xAfUd2PbxQ1WN4Hwa</br>
+
+
+
+MAIL_MAILER=smtp</br>
+MAIL_HOST=smtp.gmail.com</br>
+MAIL_PORT=587</br>
+MAIL_USERNAME=pruebasenviocorreolaraveloscar@gmail.com</br>
+MAIL_PASSWORD=jeieujzzyqvquyyj</br>
+MAIL_ENCRYPTION=tls</br>
+MAIL_FROM_ADDRESS=pruebasenviocorreolaraveloscar@gmail.com</br>
+MAIL_FROM_NAME="Testing"</br>
+
+
+5️⃣ Generar la clave de la aplicación
+
+php artisan key:generate
+
+6️⃣ Configurar JWT
+
+php artisan jwt:secret
+
+7️⃣ Ejecutar migraciones y seeders
+Para crear las tablas y datos iniciales en la base de datos, ejecuta:
+
+php artisan migrate --seed
+
+8️⃣ Levantar el servidor
+
+php artisan serve --host=localhost --port=8001
+
+Ejecutar FRONTEND PARA HACER REGISTRO DE USUARIOS NUEVOS Y PODER INTERACTUAR.
+
+Si van a quieren ver Swagger   [http://localhost:8001/](http://localhost:8001/api/documentation/)
+
+
+
+
