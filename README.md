@@ -140,7 +140,7 @@ Ejecutar FRONTEND PARA HACER REGISTRO DE USUARIOS NUEVOS Y PODER INTERACTUAR.
 
 Si van a quieren ver Swagger   [http://localhost:8001/](http://localhost:8001/api/documentation/)
 
-## 9 Aunque no es necesario, pueden descargar el frontEnd de aca https://github.com/jijunahe/frontendReact/blob/main/README.md
+## 9 Aunque no es necesario, pueden descargar el frontEnd de aca  https://github.com/jijunahe/frontendReact/
 
 
 
