@@ -60,30 +60,37 @@ class AuthController extends Controller
      */ 
     public function register(Request $request)
     {
-        //  Usamos Validator en lugar de $this->validate()
-        $validator = Validator::make($request->all(), [
+        // Validación del request con mensajes personalizados
+        $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+        ], [
+            'name.required' => 'El nombre es obligatorio.',
+            'email.required' => 'El email es obligatorio.',
+            'email.email' => 'El formato del email no es válido.',
+            'email.unique' => 'El email ya está registrado.',
+            'password.required' => 'La contraseña es obligatoria.',
+            'password.min' => 'La contraseña debe tener al menos 6 caracteres.',
+            'password.confirmed' => 'Las contraseñas no coinciden.',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        // Crear el usuario
+        // Crear usuario
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
 
-        //  Generar el token JWT
+        // Generar token JWT
         $token = JWTAuth::fromUser($user);
-        BitacoraService::registrar('registro', 'users', $user->id, ['mensaje' => 'Nuevo usuario registrado']);
 
-        return response()->json(compact('user', 'token'), 201);
+        // Registrar evento en la bitácora
+        BitacoraService::registrar('registro de usuario', 'users', $user->id, ['mensaje' => 'Nuevo usuario registrado']);
+
+        return response()->json(['message' => 'Usuario registrado exitosamente', 'token' => $token], 201);
     }
+
 
     /*
      Logueo usuarios
@@ -112,21 +119,35 @@ class AuthController extends Controller
      * )
      */ 
 
-    public function login(Request $request)
-    {
-        //  Validar que el email y la contraseña están en el request
-        $credentials = $request->only('email', 'password');
-
-        //  Intentar autenticar al usuario con JWT
-        if (!$token = JWTAuth::attempt($credentials)) {
-            return response()->json(['error' => 'Credenciales inválidas'], 401);
-        }
-        $user = auth()->user();
-        BitacoraService::registrar('inicio de sesión', 'users', $user->id, ['mensaje' => 'El usuario ha iniciado sesión']);
-
-        // Retornar el token JWT
-        return response()->json(compact('token'));
-    }
+     public function login(Request $request)
+     {
+         $request->validate([
+             'email' => 'required|email',
+             'password' => 'required'
+         ], [
+             'email.required' => 'El email es obligatorio.',
+             'email.email' => 'El formato del email no es válido.',
+             'password.required' => 'La contraseña es obligatoria.'
+         ]);
+     
+         $credentials = $request->only('email', 'password');
+     
+         $user = User::where('email', $credentials['email'])->first();
+     
+         if (!$user) {
+             return response()->json(['error' => 'El email no está registrado.'], 404);
+         }
+     
+         if (!$token = JWTAuth::attempt($credentials)) {
+             return response()->json(['error' => 'La contraseña es incorrecta.'], 401);
+         }
+     
+         BitacoraService::registrar('inicio de sesión', 'users', $user->id, ['mensaje' => 'El usuario ha iniciado sesión']);
+     
+         return response()->json(compact('token'));
+     }
+     
+     
 
     /**
      * @OA\Post(
@@ -212,17 +233,31 @@ class AuthController extends Controller
      */
 
 
-    public function refresh()
-    {
-        try {
-            $newToken = JWTAuth::refresh(JWTAuth::getToken());
-            return response()->json(['token' => $newToken]);
-        } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-            return response()->json(['error' => 'Token inválido'], 401);
-        } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
-            return response()->json(['error' => 'No se pudo refrescar el token'], 500);
-        }
-    }
+     public function refresh()
+     {
+         try {
+             // Obtiene el token actual
+             $token = JWTAuth::getToken();
+     
+             // Si no hay token, devuelve error 401
+             if (!$token) {
+                 return response()->json(['error' => 'Token no encontrado'], 401);
+             }
+     
+             // Intenta refrescar el token
+             $newToken = JWTAuth::refresh($token);
+             
+             return response()->json(['token' => $newToken]);
+     
+         } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+             return response()->json(['error' => 'Token expirado, inicia sesión nuevamente'], 401);
+         } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+             return response()->json(['error' => 'Token inválido'], 401);
+         } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+             return response()->json(['error' => 'No se pudo refrescar el token'], 500);
+         }
+     }
+     
 
 
 
